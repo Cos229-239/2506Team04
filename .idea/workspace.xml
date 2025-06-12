@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c60e1106-7d3d-4018-bfd3-1b028389c5e1" name="Changes" comment="Forth remote commit to my branch">
-      <change afterPath="$PROJECT_DIR$/HouseEdge/app.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c60e1106-7d3d-4018-bfd3-1b028389c5e1" name="Changes" comment="Forth remote commit to my branch" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +74,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\davin\IdeaProjects\HouseEdge" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="HouseEdge.app" />
@@ -143,7 +144,7 @@
       <workItem from="1749682972965" duration="157000" />
       <workItem from="1749683194551" duration="1086000" />
       <workItem from="1749684300527" duration="61000" />
-      <workItem from="1749684537037" duration="2879000" />
+      <workItem from="1749684537037" duration="3231000" />
     </task>
     <task id="LOCAL-00001" summary="initial local commit">
       <option name="closed" value="true" />
