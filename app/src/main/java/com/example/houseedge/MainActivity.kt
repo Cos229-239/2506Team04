@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             HouseEdgeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "PNP2",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
