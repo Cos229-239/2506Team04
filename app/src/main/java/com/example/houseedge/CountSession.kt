@@ -1,4 +1,4 @@
-package com.example.houseedge.ui
+package com.example.houseedge
 
 class CountSession(val playerName : String, val tableName : String,
                    val seatNumber : Int, val deckCount :Int )
