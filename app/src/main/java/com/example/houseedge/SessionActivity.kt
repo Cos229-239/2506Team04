@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.houseedge.ui.theme.HouseEdgeTheme
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.runtime.*
@@ -66,12 +67,39 @@ fun CountScreen() {
                 .padding(bottom = 32.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "Hand: $handCount", fontSize = 18.sp)
-            Text(text = "Wager: $${String.format("%.2f", wager)}", fontSize = 18.sp)
-            Text(text = "Count: $count", fontSize = 18.sp)
+            // Hand Count Box
+            Box(
+                modifier = Modifier
+                    .background(Color.White)
+                    .border(3.dp, Color.Black)
+                    .padding(16.dp)
+            ) {
+                Text(text = "Hand: $handCount", fontSize = 18.sp)
+            }
+            // Wager Box
+            Box(
+                modifier = Modifier
+                    .background(Color.White)
+                    .border(3.dp, Color.Black)
+                    .padding(16.dp)
+            ) {
+                Text(text = "Wager: $${String.format("%.2f", wager)}", fontSize = 18.sp)
+            }
+            // Count Box
+            Box(
+                modifier = Modifier
+                    .background(Color.White)
+                    .border(3.dp, Color.Black)
+                    .padding(16.dp)
+            ) {
+                Text(text = "Count: $count", fontSize = 18.sp)
+            }
         }
     }
 }
+
+
+
 
 @Preview(showBackground = true)
 @Composable
