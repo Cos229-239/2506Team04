@@ -15,7 +15,6 @@ import com.example.houseedge.ui.theme.HouseEdgeTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -23,6 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.material3.ButtonDefaults
 
 
 class SessionActivity : ComponentActivity() {
@@ -37,8 +39,8 @@ class SessionActivity : ComponentActivity() {
 
 @Composable
 fun CountScreen() {
-    var count by remember { mutableStateOf(0) }
-    var handCount by remember { mutableStateOf(0) }
+    var count by remember { mutableIntStateOf(0) }
+    var handCount by remember { mutableIntStateOf(0) }
     var wager = 0.0
 
     Column(
@@ -93,6 +95,69 @@ fun CountScreen() {
                     .padding(16.dp)
             ) {
                 Text(text = "Count: $count", fontSize = 18.sp)
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+        // +1 Button
+                OutlinedButton(
+                    onClick = {
+                        count += 1
+                        handCount += 1
+                    },
+                    modifier = Modifier
+                        .height(240.dp)
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    border = BorderStroke(4.dp, Color.White),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = Color.White,
+                        containerColor = Color(0xFF444444)
+                    )
+                ) {
+                    Text(text = "+1", fontSize = 64.sp)
+                }
+                // 0 Button
+                OutlinedButton(
+                    onClick = {
+                        handCount += 1
+                    },
+                    modifier = Modifier
+                        .height(240.dp)
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    border = BorderStroke(4.dp, Color.White),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = Color.White,
+                        containerColor = Color(0xFF444444)
+                    )
+                ) {
+                    Text(text = "0", fontSize = 64.sp)
+                }
+                // -1 Button
+                OutlinedButton(
+                    onClick = {
+                        count -= 1
+                        handCount += 1
+                    },
+                    modifier = Modifier
+                        .height(240.dp)
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    border = BorderStroke(4.dp, Color.White),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = Color.White,
+                        containerColor = Color(0xFF444444)
+                    )
+                ) {
+                    Text(text = "-1", fontSize = 64.sp)
+                }
             }
         }
     }
