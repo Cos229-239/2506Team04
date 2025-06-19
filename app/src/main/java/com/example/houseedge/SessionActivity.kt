@@ -59,7 +59,7 @@ fun CountScreen() {
                     end = Offset.Infinite
                 )
             )
-            .padding(16.dp),
+            .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Display for the Hand, Wager, and Count
