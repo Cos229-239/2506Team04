@@ -73,6 +73,16 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+font font
+font lexend_black
+font lexend_bold
+font lexend_extrabold
+font lexend_extralight
+font lexend_light
+font lexend_medium
+font lexend_regular
+font lexend_semibold
+font lexend_thin
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1
@@ -262,6 +272,7 @@ string status_bar_notification_info_overflow
 string switch_role
 string tab
 string template_percent
+string title_activity_session
 string tooltip_description
 string tooltip_label
 style DialogWindowTheme

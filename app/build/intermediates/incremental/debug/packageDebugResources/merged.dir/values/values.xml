@@ -8,5 +8,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">HouseEdge</string>
+    <string name="title_activity_session">SessionActivity</string>
     <style name="Theme.HouseEdge" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>

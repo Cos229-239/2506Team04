@@ -109,7 +109,7 @@ fun CountScreen() {
                 OutlinedButton(
                     onClick = {
                         count += 1
-                        handCount += 1
+
                     },
                     modifier = Modifier
                         .height(240.dp)
@@ -126,7 +126,7 @@ fun CountScreen() {
                 // 0 Button
                 OutlinedButton(
                     onClick = {
-                        handCount += 1
+//                        handCount += 1
                     },
                     modifier = Modifier
                         .height(240.dp)
@@ -144,7 +144,7 @@ fun CountScreen() {
                 OutlinedButton(
                     onClick = {
                         count -= 1
-                        handCount += 1
+//                        handCount += 1
                     },
                     modifier = Modifier
                         .height(240.dp)
