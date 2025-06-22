@@ -6,8 +6,6 @@
       <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/2e5d03c8dee8f7dba77dc26925c26e1c/transformed/ui-util-release/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.compose.ui/ui-util-android/1.7.0/8533d5b40174e5cbd6b70ad99710429e7eadbb64/ui-util-android-1.7.0-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

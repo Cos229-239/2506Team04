@@ -6,8 +6,6 @@
       <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/c20d24b82a5c77595dfb51ee8a087d35/transformed/ui-geometry-release/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.compose.ui/ui-geometry-android/1.7.0/1dd31c0c8b7e1d3d94f2d3811e82ac96feca355/ui-geometry-android-1.7.0-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

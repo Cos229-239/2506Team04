@@ -5,8 +5,6 @@
       <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/102c2cbfbc2e013a625d7db7dbc3a5fb/transformed/monitor-1.7.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test/monitor/1.7.1/3bb3e64a2ff28bd3fdedf8a7c3cc09f22e12806a/monitor-1.7.1-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

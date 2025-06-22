@@ -6,9 +6,6 @@
       <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/0df5cf38a833e55c484ef3769e9f39d9/transformed/animation-core-release/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.compose.animation/animation-core-android/1.7.0/5f4e9009e638c425f3613758eed8fed58bb44a23/animation-core-1.7.0-samples-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.compose.animation/animation-core-android/1.7.0/f82d2b4b86ee4b52eef13238aba9b76839d273ff/animation-core-android-1.7.0-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

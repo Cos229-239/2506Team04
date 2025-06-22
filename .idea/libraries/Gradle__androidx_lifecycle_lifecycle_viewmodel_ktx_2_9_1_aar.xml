@@ -6,8 +6,6 @@
       <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/6d1ec0c3c697378cef7a0fc24d34022e/transformed/lifecycle-viewmodel-ktx-2.9.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-viewmodel-ktx/2.9.1/6b61248b684d6cc83a4855ef1b98dd76536d8ec7/lifecycle-viewmodel-ktx-2.9.1-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
