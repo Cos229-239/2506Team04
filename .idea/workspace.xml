@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="37bcb6be-60c4-4ee9-b8f1-2e7c5ed0fe93" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" beforeDir="false" />
@@ -31,16 +32,23 @@
 =======
     <list default="true" id="c60e1106-7d3d-4018-bfd3-1b028389c5e1" name="Changes" comment="Forth remote commit to my branch" />
 >>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
+=======
+    <list default="true" id="c60e1106-7d3d-4018-bfd3-1b028389c5e1" name="Changes" comment="Forth remote commit to my branch" />
+>>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\davin\.android\avd\Medium_Phone.avd)]" />
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+>>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
 =======
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
 >>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
@@ -165,6 +173,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -186,6 +195,9 @@
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
         <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Hybrid>
+=======
+      <option name="DEBUGGER_TYPE" value="Java" />
+>>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
 =======
       <option name="DEBUGGER_TYPE" value="Java" />
 >>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
@@ -222,6 +234,9 @@
       </set>
     </attachedChunks>
   </component>
+<<<<<<< HEAD
+>>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
+=======
 >>>>>>> parent of be12d3b (`Forth remote commit to my branch`)
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
