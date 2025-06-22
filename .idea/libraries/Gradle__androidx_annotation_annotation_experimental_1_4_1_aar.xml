@@ -6,6 +6,8 @@
       <root url="file://$USER_HOME$/.gradle/caches/8.11.1/transforms/72be18a907483c195b2f830b6aa5f1e2/transformed/annotation-experimental-1.4.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-experimental/1.4.1/4dc003cb3c5ff16a1c3d09f3d1f7ae7b2d14a9c4/annotation-experimental-1.4.1-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
