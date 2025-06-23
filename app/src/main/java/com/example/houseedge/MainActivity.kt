@@ -75,7 +75,7 @@ fun StartButton() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { /*T*/ },
             enabled = true,
             shape = ButtonDefaults.shape,
             border = BorderStroke(2.dp,color = Color.White),
