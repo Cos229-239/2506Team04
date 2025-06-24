@@ -1,5 +1,6 @@
 package com.example.houseedge
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -69,13 +71,19 @@ class MainActivity : ComponentActivity() {
 //Absolute.SpaceBetween, Absolute.SpaceAround, Absolute.SpaceEvenly
 @Composable
 fun StartButton() {
+
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Button(
-            onClick = { /*T*/ },
+            onClick = {
+                val intent = Intent(context, SessionActivity::class.java)
+                context.startActivity(intent)
+            },
             enabled = true,
             shape = ButtonDefaults.shape,
             border = BorderStroke(2.dp,color = Color.White),

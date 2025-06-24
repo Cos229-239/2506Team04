@@ -23,6 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SessionActivity"
+            android:exported="false"
+            android:label="Session Activity"
+            android:theme="@style/Theme.HouseEdge">
+        </activity>
     </application>
 
 </manifest>
