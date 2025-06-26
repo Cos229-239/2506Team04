@@ -105,7 +105,7 @@ fun CountScreen() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // +1 Button
+        // +1 Button
                 OutlinedButton(
                     onClick = {
                         count += 1
@@ -170,4 +170,4 @@ fun CountScreen() {
 @Composable
 fun CountScreenPreview() {
     CountScreen()
-}
+    }
