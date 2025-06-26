@@ -101,7 +101,7 @@ fun StartButton() {
                 modifier = Modifier
             ) {
                 Text(
-                    text = "START",
+                    text = "START ",
                     fontSize = 50.sp,
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic
