@@ -1,10 +1,10 @@
-#Sat Jun 21 23:32:42 CDT 2025
-base.0=C\:\\Users\\davin\\IdeaProjects\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\davin\\IdeaProjects\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\davin\\IdeaProjects\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=C\:\\Users\\davin\\IdeaProjects\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.4=C\:\\Users\\davin\\IdeaProjects\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.5=C\:\\Users\\davin\\IdeaProjects\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Thu Jun 26 12:53:06 CDT 2025
+base.0=C\:\\Users\\zacar\\Desktop\\School\\Project and Portfolio 2\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\zacar\\Desktop\\School\\Project and Portfolio 2\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.2=C\:\\Users\\zacar\\Desktop\\School\\Project and Portfolio 2\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=C\:\\Users\\zacar\\Desktop\\School\\Project and Portfolio 2\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.4=C\:\\Users\\zacar\\Desktop\\School\\Project and Portfolio 2\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.5=C\:\\Users\\zacar\\Desktop\\School\\Project and Portfolio 2\\HouseEdge\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=10/classes.dex
