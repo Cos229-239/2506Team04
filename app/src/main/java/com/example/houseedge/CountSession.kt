@@ -14,6 +14,8 @@ class CountSession(val playerName : String, val tableName : String,
     private var wagerAdvantage = 0
     private var wagerDisadvantage = 0
 
+    //Add an array of Hand objects
+
     fun UndoLastInput()
     {
         //pops last off of countStack then recalculates allowing operator to fix their mistake
