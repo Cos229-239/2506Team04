@@ -25,6 +25,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.material3.*
+import androidx.compose.ui.*
+import androidx.compose.ui.input.pointer.pointerInput
+import kotlinx.coroutines.launch
 
 
 class SessionActivity : ComponentActivity() {
@@ -38,136 +43,180 @@ class SessionActivity : ComponentActivity() {
 }
 
 @Composable
-fun CountScreen() {
-    var count by remember { mutableIntStateOf(0) }
-    var handCount by remember { mutableIntStateOf(0) }
-    var wager = 0.0
-
+fun WinLossMenu(onResult: () -> Unit) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        Color(0xFFF50202),
-                        Color(0xFFBD4747),
-                        Color(0xFF6C6060),
-                        Color(0xFF516B96),
-                        Color(0xFF008ADF)
-                    ),
-                    start = Offset.Zero,
-                    end = Offset.Infinite
-                )
-            )
-            .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 10.dp),
+            .fillMaxHeight()
+            .width(250.dp)
+            .background(Color.DarkGray)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Display for the Hand, Wager, and Count
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 32.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            // Hand Count Box
-            Box(
+        listOf("Win", "Loss", "Push").forEach { label ->
+            OutlinedButton(
+                onClick = onResult,
                 modifier = Modifier
-                    .background(Color.White)
-                    .border(3.dp, Color.Black)
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .height(225.dp)
+                    .padding(8.dp),
+                border = BorderStroke(4.dp, Color.White),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = Color.White,
+                    containerColor = Color(0xFF444444)
+                )
             ) {
-                Text(text = "Hand: $handCount", fontSize = 18.sp)
-            }
-            // Wager Box
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .border(3.dp, Color.Black)
-                    .padding(16.dp)
-            ) {
-                Text(text = "Wager: $${String.format("%.2f", wager)}", fontSize = 18.sp)
-            }
-            // Count Box
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .border(3.dp, Color.Black)
-                    .padding(16.dp)
-            ) {
-                Text(text = "Count: $count", fontSize = 18.sp)
-            }
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-        // +1 Button
-                OutlinedButton(
-                    onClick = {
-                        count += 1
-
-                    },
-                    modifier = Modifier
-                        .height(240.dp)
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    border = BorderStroke(4.dp, Color.White),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = Color.White,
-                        containerColor = Color(0xFF444444)
-                    )
-                ) {
-                    Text(text = "+1", fontSize = 64.sp)
-                }
-                // 0 Button
-                OutlinedButton(
-                    onClick = {
-//                        handCount += 1
-                    },
-                    modifier = Modifier
-                        .height(240.dp)
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    border = BorderStroke(4.dp, Color.White),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = Color.White,
-                        containerColor = Color(0xFF444444)
-                    )
-                ) {
-                    Text(text = "0", fontSize = 64.sp)
-                }
-                // -1 Button
-                OutlinedButton(
-                    onClick = {
-                        count -= 1
-//                        handCount += 1
-                    },
-                    modifier = Modifier
-                        .height(240.dp)
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    border = BorderStroke(4.dp, Color.White),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = Color.White,
-                        containerColor = Color(0xFF444444)
-                    )
-                ) {
-                    Text(text = "-1", fontSize = 64.sp)
-                }
+                Text(label, fontSize = 64.sp)
             }
         }
     }
 }
 
-
-
-
-@Preview(showBackground = true)
 @Composable
-fun CountScreenPreview() {
-    CountScreen()
+fun CountScreen() {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+    var count by remember { mutableIntStateOf(0) }
+    var handCount by remember { mutableIntStateOf(0) }
+    var wager = 0.0
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            WinLossMenu {
+                handCount += 1
+                scope.launch { drawerState.close() }
+            }
+        }
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures { _, dragAmount ->
+                        if (dragAmount < 50) { // Positive indicates right swipe
+                            scope.launch { drawerState.open() }
+                        }
+                    }
+                }
+        ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                Color(0xFFF50202),
+                                Color(0xFFBD4747),
+                                Color(0xFF6C6060),
+                                Color(0xFF516B96),
+                                Color(0xFF008ADF)
+                            ),
+                            start = Offset.Zero,
+                            end = Offset.Infinite
+                        )
+                    )
+                    .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Display for the Hand, Wager, and Count
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 32.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    // Hand Count Box
+                    Box(
+                        modifier = Modifier
+                            .background(Color.White)
+                            .border(3.dp, Color.Black)
+                            .padding(16.dp)
+                    ) {
+                        Text(text = "Hand: $handCount", fontSize = 18.sp)
+                    }
+                    // Wager Box
+                    Box(
+                        modifier = Modifier
+                            .background(Color.White)
+                            .border(3.dp, Color.Black)
+                            .padding(16.dp)
+                    ) {
+                        Text(text = "Wager: $${String.format("%.2f", wager)}", fontSize = 18.sp)
+                    }
+                    // Count Box
+                    Box(
+                        modifier = Modifier
+                            .background(Color.White)
+                            .border(3.dp, Color.Black)
+                            .padding(16.dp)
+                    ) {
+                        Text(text = "Count: $count", fontSize = 18.sp)
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        // +1 Button
+                        OutlinedButton(
+                            onClick = {
+                                count += 1
+                            },
+                            modifier = Modifier
+                                .height(240.dp)
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            border = BorderStroke(4.dp, Color.White),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = Color.White,
+                                containerColor = Color(0xFF444444)
+                            )
+                        ) {
+                            Text(text = "+1", fontSize = 64.sp)
+                        }
+                        // 0 Button
+                        OutlinedButton(
+                            onClick = {
+
+                            },
+                            modifier = Modifier
+                                .height(240.dp)
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            border = BorderStroke(4.dp, Color.White),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = Color.White,
+                                containerColor = Color(0xFF444444)
+                            )
+                        ) {
+                            Text(text = "0", fontSize = 64.sp)
+                        }
+                        // -1 Button
+                        OutlinedButton(
+                            onClick = {
+                                count -= 1
+                            },
+                            modifier = Modifier
+                                .height(240.dp)
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            border = BorderStroke(4.dp, Color.White),
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = Color.White,
+                                containerColor = Color(0xFF444444)
+                            )
+                        ) {
+                            Text(text = "-1", fontSize = 64.sp)
+                        }
+                    }
+                }
+            }
+        }
     }
+}
