@@ -4,30 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.houseedge.ui.theme.HouseEdgeTheme
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
-import androidx.compose.material3.*
-import androidx.compose.ui.*
 import androidx.compose.ui.input.pointer.pointerInput
 import kotlinx.coroutines.launch
 
@@ -69,6 +60,24 @@ fun WinLossMenu(onResult: () -> Unit) {
                 Text(label, fontSize = 64.sp)
             }
         }
+    }
+}
+
+@Composable
+fun CountButtons(label: String, onClick: () -> Unit) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(240.dp)
+            .padding(8.dp),
+        border = BorderStroke(4.dp, Color.White),
+        colors = ButtonDefaults.outlinedButtonColors(
+            contentColor = Color.White,
+            containerColor = Color(0xFF444444)
+        )
+    ) {
+        Text(label, fontSize = 64.sp)
     }
 }
 
@@ -160,60 +169,12 @@ fun CountScreen() {
                         .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
+                    // Count Buttons to update the Count within the app screen
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        // +1 Button
-                        OutlinedButton(
-                            onClick = {
-                                count += 1
-                            },
-                            modifier = Modifier
-                                .height(240.dp)
-                                .fillMaxWidth()
-                                .padding(8.dp),
-                            border = BorderStroke(4.dp, Color.White),
-                            colors = ButtonDefaults.outlinedButtonColors(
-                                contentColor = Color.White,
-                                containerColor = Color(0xFF444444)
-                            )
-                        ) {
-                            Text(text = "+1", fontSize = 64.sp)
-                        }
-                        // 0 Button
-                        OutlinedButton(
-                            onClick = {
-
-                            },
-                            modifier = Modifier
-                                .height(240.dp)
-                                .fillMaxWidth()
-                                .padding(8.dp),
-                            border = BorderStroke(4.dp, Color.White),
-                            colors = ButtonDefaults.outlinedButtonColors(
-                                contentColor = Color.White,
-                                containerColor = Color(0xFF444444)
-                            )
-                        ) {
-                            Text(text = "0", fontSize = 64.sp)
-                        }
-                        // -1 Button
-                        OutlinedButton(
-                            onClick = {
-                                count -= 1
-                            },
-                            modifier = Modifier
-                                .height(240.dp)
-                                .fillMaxWidth()
-                                .padding(8.dp),
-                            border = BorderStroke(4.dp, Color.White),
-                            colors = ButtonDefaults.outlinedButtonColors(
-                                contentColor = Color.White,
-                                containerColor = Color(0xFF444444)
-                            )
-                        ) {
-                            Text(text = "-1", fontSize = 64.sp)
-                        }
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                            CountButtons("+1") { count += 1 }
+                            CountButtons("0") { }
+                            CountButtons("-1") { count -= 1 }
                     }
                 }
             }
