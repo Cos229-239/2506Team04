@@ -63,6 +63,7 @@ fun WinLossMenu(onResult: () -> Unit) {
     }
 }
 
+// Design function for the buttons to update the count
 @Composable
 fun CountButtons(label: String, onClick: () -> Unit) {
     OutlinedButton(
@@ -81,13 +82,85 @@ fun CountButtons(label: String, onClick: () -> Unit) {
     }
 }
 
+// Numberpad within the wager popup menu
+@Composable
+fun NumberPad(input: String, onInputChanged: (String) -> Unit, onApply: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Gray)
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = input.ifEmpty { "0" },
+            fontSize = 38.sp,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        // Button list for the number pad
+        val buttonRows = listOf(
+            listOf("1", "2", "3"),
+            listOf("4", "5", "6"),
+            listOf("7", "8", "9"),
+            listOf(".", "0", "Del")
+        )
+        buttonRows.forEach { row ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                row.forEach { label ->
+                    OutlinedButton(
+                        onClick = {
+                            when (label) {
+                                "Del" -> {
+                                    if (input.isNotEmpty()) {
+                                        onInputChanged(input.dropLast(1))
+                                    }
+                                }
+
+                                else -> {
+                                    onInputChanged(input + label)
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .size(125.dp)
+                            .padding(8.dp),
+                        border = BorderStroke(4.dp, Color.White),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = Color.White,
+                            containerColor = Color(0xFF444444)
+                        )
+                    ) {
+                        Text(label, fontSize = 38.sp)
+                    }
+                }
+            }
+        }
+        Button(
+            onClick = onApply,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+                .height(50.dp)
+        ) {
+            Text("Set Wager", fontSize = 24.sp)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountScreen() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     var count by remember { mutableIntStateOf(0) }
     var handCount by remember { mutableIntStateOf(0) }
     var wager = 0.0
+    var wagerInput by remember { mutableStateOf("") }
+    var showBottomSheet by remember { mutableStateOf(false) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -151,6 +224,7 @@ fun CountScreen() {
                             .background(Color.White)
                             .border(3.dp, Color.Black)
                             .padding(16.dp)
+                            .clickable { showBottomSheet = true }
                     ) {
                         Text(text = "Wager: $${String.format("%.2f", wager)}", fontSize = 18.sp)
                     }
@@ -176,6 +250,24 @@ fun CountScreen() {
                             CountButtons("0") { }
                             CountButtons("-1") { count -= 1 }
                     }
+                }
+            }
+            // Bottom Sheet for the Wager input menu
+            if (showBottomSheet) {
+                ModalBottomSheet(
+                    onDismissRequest = { showBottomSheet = false },
+                    sheetState = bottomSheetState
+                ) {
+                    NumberPad(
+                        input = wagerInput,
+                        onInputChanged = { updated ->
+                            wagerInput = updated
+                        },
+                        onApply = {
+                            wager = wagerInput.toDoubleOrNull() ?: 0.0
+                            showBottomSheet = false
+                        }
+                    )
                 }
             }
         }
