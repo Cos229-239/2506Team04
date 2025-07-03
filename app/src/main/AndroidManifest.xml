@@ -15,7 +15,7 @@
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
-                android:label="@string/app_name"
+                android:label="HouseEdge"
                 android:theme="@style/Theme.HouseEdge">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -24,9 +24,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SessionActivity"
+            android:name=".DetailActivity"
             android:exported="false"
-            android:label="Session Activity"
+            android:label="Detail Screen"
             android:theme="@style/Theme.HouseEdge">
         </activity>
     </application>
