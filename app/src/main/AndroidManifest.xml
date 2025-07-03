@@ -23,12 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DetailActivity"
-            android:exported="false"
-            android:label="Detail Screen"
-            android:theme="@style/Theme.HouseEdge">
-        </activity>
     </application>
 
 </manifest>
