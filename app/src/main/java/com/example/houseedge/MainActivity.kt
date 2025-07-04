@@ -93,7 +93,7 @@ fun StartButton() {
                 containerColor = Color(0xFF6C6060),
                 contentColor = Color.Black,
 
-            )
+                )
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -157,7 +157,3 @@ fun HouseEdgeLogo(modifier: Modifier = Modifier) {
         )
     }
 }
-
-
-
-
