@@ -1,5 +1,6 @@
 package com.example.houseedge
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -45,6 +47,9 @@ class DetailActivity : ComponentActivity() {
 
 @Composable
 fun DetailScreen(){
+
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -160,7 +165,10 @@ fun DetailScreen(){
             )
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    val intent = Intent(context, SessionActivity::class.java)
+                    context.startActivity(intent)
+                },
                 enabled = true,
                 shape = ButtonDefaults.shape,
                 border = BorderStroke(2.dp, color = Color.White),
