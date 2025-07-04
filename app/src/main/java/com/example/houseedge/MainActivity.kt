@@ -29,6 +29,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.houseedge.ui.theme.HouseEdgeTheme
+import com.example.houseedge.R
+import com.example.houseedge.DetailActivity
+
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +86,7 @@ fun StartButton() {
     ) {
         Button(
             onClick = {
-                val intent = Intent(context, SessionActivity::class.java)
+                val intent = Intent(context, DetailActivity::class.java)
                 context.startActivity(intent)
             },
             enabled = true,
@@ -157,3 +162,4 @@ fun HouseEdgeLogo(modifier: Modifier = Modifier) {
         )
     }
 }
+
