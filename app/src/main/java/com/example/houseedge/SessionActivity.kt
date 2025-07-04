@@ -246,9 +246,9 @@ fun CountScreen() {
                     // Count Buttons to update the Count within the app screen
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                            CountButtons("+1") { count += 1 }
-                            CountButtons("0") { }
-                            CountButtons("-1") { count -= 1 }
+                        CountButtons("+1") { count += 1 }
+                        CountButtons("0") { }
+                        CountButtons("-1") { count -= 1 }
                     }
                 }
             }
