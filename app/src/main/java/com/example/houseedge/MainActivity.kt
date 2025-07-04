@@ -1,5 +1,6 @@
 package com.example.houseedge
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -27,6 +29,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.houseedge.ui.theme.HouseEdgeTheme
+import com.example.houseedge.R
+import com.example.houseedge.DetailActivity
+
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,13 +76,19 @@ class MainActivity : ComponentActivity() {
 //Absolute.SpaceBetween, Absolute.SpaceAround, Absolute.SpaceEvenly
 @Composable
 fun StartButton() {
+
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Button(
-            onClick = { /*T*/ },
+            onClick = {
+                val intent = Intent(context, DetailActivity::class.java)
+                context.startActivity(intent)
+            },
             enabled = true,
             shape = ButtonDefaults.shape,
             border = BorderStroke(2.dp,color = Color.White),
@@ -85,7 +98,7 @@ fun StartButton() {
                 containerColor = Color(0xFF6C6060),
                 contentColor = Color.Black,
 
-            )
+                )
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -149,7 +162,5 @@ fun HouseEdgeLogo(modifier: Modifier = Modifier) {
         )
     }
 }
-
-
 
 
