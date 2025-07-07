@@ -22,17 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.houseedge.ui.theme.HouseEdgeTheme
-import com.example.houseedge.R
-import com.example.houseedge.DetailActivity
-
-
+import com.example.houseedge.ui.theme.lexendFontFamily
 
 
 class MainActivity : ComponentActivity() {
@@ -40,34 +35,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            HouseEdgeTheme {
-                Scaffold(
-                    modifier = Modifier
-                        .fillMaxSize()
-                )
-                { innerPadding ->
-                    HouseEdgeLogo(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .fillMaxSize()
-                            .background(
-                                Brush.linearGradient(
-                                    listOf(
-                                        Color(0xFFF50202),
-                                        Color(0xFFBD4747),
-                                        Color(0xFF6C6060),
-                                        Color(0xFF516B96),
-                                        Color(0xFF008ADF)
-                                    )
-                                )
-                            )
-                    )
-                    StartButton()
-                }
-            }
+            HouseEdgeTheme()
         }
     }
 }
+
 //Alignment = Cross Axis (Row = Vertical, Column = Horizontal)
 //Arrangement = Main Axis (Row = Horizontal, Column = Vertical)
 //RowAlignment: Top, CenterVertically, Bottom
@@ -75,7 +47,36 @@ class MainActivity : ComponentActivity() {
 //Absolute.Left, Absolute.Right, Absolute.Center
 //Absolute.SpaceBetween, Absolute.SpaceAround, Absolute.SpaceEvenly
 @Composable
+fun HouseEdgeTheme() {
+
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+    )
+    { innerPadding ->
+        HouseEdgeLogo(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .background(
+                    Brush.linearGradient(
+                        listOf(
+                            Color(0xFFF50202),
+                            Color(0xFFBD4747),
+                            Color(0xFF6C6060),
+                            Color(0xFF516B96),
+                            Color(0xFF008ADF)
+                        )
+                    )
+                )
+        )
+        StartButton()
+    }
+}
+
+@Composable
 fun StartButton() {
+
 
     val context = LocalContext.current
 
@@ -91,13 +92,12 @@ fun StartButton() {
             },
             enabled = true,
             shape = ButtonDefaults.shape,
-            border = BorderStroke(2.dp,color = Color.White),
+            border = BorderStroke(2.dp, color = Color.White),
             modifier = Modifier
                 .size(400.dp, 150.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF6C6060),
                 contentColor = Color.Black,
-
                 )
         ) {
             Column(
@@ -117,8 +117,6 @@ fun StartButton() {
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic
                 )
-
-
             }
         }
     }
@@ -126,17 +124,6 @@ fun StartButton() {
 
 @Composable
 fun HouseEdgeLogo(modifier: Modifier = Modifier) {
-    val fontFamily = FontFamily(
-        Font(R.font.lexend_thin, FontWeight.Thin),
-        Font(R.font.lexend_extralight, FontWeight.ExtraLight),
-        Font(R.font.lexend_light, FontWeight.Light),
-        Font(R.font.lexend_regular, FontWeight.Normal),
-        Font(R.font.lexend_medium, FontWeight.Medium),
-        Font(R.font.lexend_semibold, FontWeight.SemiBold),
-        Font(R.font.lexend_bold, FontWeight.Bold),
-        Font(R.font.lexend_extrabold, FontWeight.ExtraBold),
-        Font(R.font.lexend_black, FontWeight.Black)
-    )
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -147,20 +134,24 @@ fun HouseEdgeLogo(modifier: Modifier = Modifier) {
         Text(
             text = "HOUSE",
             color = Color.LightGray,
-            fontSize = 100.sp,
-            fontFamily = fontFamily,
+            fontSize = 75.sp,
+            fontFamily = lexendFontFamily,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic
         )
         Text(
             text = "EDGE",
             color = Color.LightGray,
-            fontSize = 110.sp,
-            fontFamily = fontFamily,
+            fontSize = 75.sp,
+            fontFamily = lexendFontFamily,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic
         )
     }
 }
 
-
+@Preview(showBackground = true)
+@Composable
+fun HouseEdgeThemePreview() {
+    HouseEdgeTheme()
+}
