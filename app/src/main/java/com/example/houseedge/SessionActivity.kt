@@ -27,8 +27,13 @@ class SessionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val playerName = intent.getStringExtra("playerName") ?: "defaultPlayer"
+        val tableName = intent.getStringExtra("tableName") ?: "defaultTable"
+        val seatNumber = intent.getIntExtra("seatNumber", 0)
+        val deckCount = intent.getIntExtra("deckCount", 0)
+
         setContent {
-            CountScreen()
+            CountScreen( playerName, tableName, seatNumber, deckCount)
         }
     }
 }
@@ -152,13 +157,11 @@ fun NumberPad(input: String, onInputChanged: (String) -> Unit, onApply: () -> Un
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountScreen() {
+fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCount: Int) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
-    var count by remember { mutableIntStateOf(0) }
-    var handCount by remember { mutableIntStateOf(0) }
-    var wager = 0.0
+    val session = remember { CountSession(playerName, tableName, seatNumber, deckCount) }
     var wagerInput by remember { mutableStateOf("") }
     var showBottomSheet by remember { mutableStateOf(false) }
 
@@ -166,7 +169,7 @@ fun CountScreen() {
         drawerState = drawerState,
         drawerContent = {
             WinLossMenu {
-                handCount += 1
+                session.setHand(session.getHand() + 1)
                 scope.launch { drawerState.close() }
             }
         }
@@ -216,7 +219,7 @@ fun CountScreen() {
                             .border(3.dp, Color.Black)
                             .padding(16.dp)
                     ) {
-                        Text(text = "Hand: $handCount", fontSize = 18.sp)
+                        Text(text = "Hand: ${session.getHand()}", fontSize = 18.sp)
                     }
                     // Wager Box
                     Box(
@@ -226,7 +229,7 @@ fun CountScreen() {
                             .padding(16.dp)
                             .clickable { showBottomSheet = true }
                     ) {
-                        Text(text = "Wager: $${String.format("%.2f", wager)}", fontSize = 18.sp)
+                        Text(text = "Wager: $${String.format("%.2f", session.getWager().toDouble())}", fontSize = 18.sp)
                     }
                     // Count Box
                     Box(
@@ -235,7 +238,7 @@ fun CountScreen() {
                             .border(3.dp, Color.Black)
                             .padding(16.dp)
                     ) {
-                        Text(text = "Count: $count", fontSize = 18.sp)
+                        Text(text = "Count: ${session.getRunningCount()}", fontSize = 18.sp)
                     }
                 }
                 Box(
@@ -246,9 +249,9 @@ fun CountScreen() {
                     // Count Buttons to update the Count within the app screen
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        CountButtons("+1") { count += 1 }
+                        CountButtons("+1") { session.setRunningCount(session.getRunningCount() + 1) }
                         CountButtons("0") { }
-                        CountButtons("-1") { count -= 1 }
+                        CountButtons("-1") { session.setRunningCount(session.getRunningCount() - 1) }
                     }
                 }
             }
@@ -264,7 +267,7 @@ fun CountScreen() {
                             wagerInput = updated
                         },
                         onApply = {
-                            wager = wagerInput.toDoubleOrNull() ?: 0.0
+                            session.setWager(wagerInput.toDoubleOrNull()?.toInt() ?: 0)
                             showBottomSheet = false
                         }
                     )
