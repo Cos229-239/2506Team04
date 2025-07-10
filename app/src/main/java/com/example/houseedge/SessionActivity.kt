@@ -190,6 +190,11 @@ fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCoun
     val session = remember { CountSession(playerName, tableName, seatNumber, deckCount) }
     var wagerInput by remember { mutableStateOf("") }
     var showBottomSheet by remember { mutableStateOf(false) }
+    var count by remember { mutableIntStateOf(0) }
+    var handCount by remember { mutableIntStateOf(0) }
+    var wager = 0.0
+
+
 
     ModalNavigationDrawer(
         drawerState = drawerState,
