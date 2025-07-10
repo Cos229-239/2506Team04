@@ -35,6 +35,12 @@
             android:label="Detail Activity"
             android:theme="@style/Theme.HouseEdge">
         </activity>
+        <activity
+            android:name=".loginSystem.LoginActivity"
+            android:exported="false"
+            android:label="Detail Activity"
+            android:theme="@style/Theme.HouseEdge">
+        </activity>
     </application>
 
 </manifest>
