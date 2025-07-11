@@ -9,7 +9,7 @@ class CountSession(val playerName : String, val tableName : String,
     //Operator input is pushed onto the countStack
     private val countStack :MutableList<String> = mutableListOf()
     private var trueCount = 0       // trueCount = runningCount/decksRemaining
-    private var hand = 0
+    private var hand = 1
     private var wager = 0
     private var wagerAdvantage = 0
     private var wagerDisadvantage = 0
