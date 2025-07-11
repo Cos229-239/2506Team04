@@ -8,18 +8,44 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
-import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.pointerInput
 import kotlinx.coroutines.launch
 
 
@@ -27,8 +53,13 @@ class SessionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val playerName = intent.getStringExtra("playerName") ?: "defaultPlayer"
+        val tableName = intent.getStringExtra("tableName") ?: "defaultTable"
+        val seatNumber = intent.getIntExtra("seatNumber", 0)
+        val deckCount = intent.getIntExtra("deckCount", 0)
+
         setContent {
-            CountScreen()
+            CountScreen( playerName, tableName, seatNumber, deckCount)
         }
     }
 }
@@ -152,21 +183,24 @@ fun NumberPad(input: String, onInputChanged: (String) -> Unit, onApply: () -> Un
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountScreen() {
+fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCount: Int) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
+    val session = remember { CountSession(playerName, tableName, seatNumber, deckCount) }
+    var wagerInput by remember { mutableStateOf("") }
+    var showBottomSheet by remember { mutableStateOf(false) }
     var count by remember { mutableIntStateOf(0) }
     var handCount by remember { mutableIntStateOf(0) }
     var wager = 0.0
-    var wagerInput by remember { mutableStateOf("") }
-    var showBottomSheet by remember { mutableStateOf(false) }
+
+
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             WinLossMenu {
-                handCount += 1
+                session.setHand(session.getHand() + 1)
                 scope.launch { drawerState.close() }
             }
         }
@@ -216,7 +250,7 @@ fun CountScreen() {
                             .border(3.dp, Color.Black)
                             .padding(16.dp)
                     ) {
-                        Text(text = "Hand: $handCount", fontSize = 18.sp)
+                        Text(text = "Hand: ${session.getHand()}", fontSize = 18.sp)
                     }
                     // Wager Box
                     Box(
@@ -226,16 +260,21 @@ fun CountScreen() {
                             .padding(16.dp)
                             .clickable { showBottomSheet = true }
                     ) {
-                        Text(text = "Wager: $${String.format("%.2f", wager)}", fontSize = 18.sp)
+                        Text(text = "Wager: $${String.format("%.2f", session.getWager().toDouble())}", fontSize = 18.sp)
                     }
+
+                    val maxCount = 15
+                    val fraction = (count.toFloat()/ maxCount.toFloat()).coerceIn(0.0F,1.0F)
+                    val interlopedButtonColor = lerp(Color(0xFF008ADF), Color(0xFFF50202), fraction)
+
                     // Count Box
                     Box(
                         modifier = Modifier
-                            .background(Color.White)
+                            .background(interlopedButtonColor)
                             .border(3.dp, Color.Black)
                             .padding(16.dp)
                     ) {
-                        Text(text = "Count: $count", fontSize = 18.sp)
+                        Text(text = "Count: ${session.getRunningCount()}", fontSize = 18.sp)
                     }
                 }
                 Box(
@@ -246,9 +285,9 @@ fun CountScreen() {
                     // Count Buttons to update the Count within the app screen
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        CountButtons("+1") { count += 1 }
+                        CountButtons("+1") { session.setRunningCount(session.getRunningCount() + 1) }
                         CountButtons("0") { }
-                        CountButtons("-1") { count -= 1 }
+                        CountButtons("-1") { session.setRunningCount(session.getRunningCount() - 1) }
                     }
                 }
             }
@@ -264,7 +303,7 @@ fun CountScreen() {
                             wagerInput = updated
                         },
                         onApply = {
-                            wager = wagerInput.toDoubleOrNull() ?: 0.0
+                            session.setWager(wagerInput.toDoubleOrNull()?.toInt() ?: 0)
                             showBottomSheet = false
                         }
                     )
