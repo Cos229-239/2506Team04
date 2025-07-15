@@ -1,26 +1,31 @@
 package com.example.houseedge
 
+import androidx.compose.runtime.*
+
+
 class CountSession(val playerName : String, val tableName : String,
                    val seatNumber : Int, val deckCount :Int )
 {
-    private var runningCount = 0
+    var runningCount by mutableIntStateOf(0)
+        private set
     private var decksRemaining = deckCount
 
     //Operator input is pushed onto the countStack
     private val countStack :MutableList<String> = mutableListOf()
     private var trueCount = 0       // trueCount = runningCount/decksRemaining
-    private var hand = 1
-    private var wager = 0
+    var hand by mutableIntStateOf(1)
+        private set
+    var wager by mutableIntStateOf(0)
     private var wagerAdvantage = 0
     private var wagerDisadvantage = 0
 
-    fun UndoLastInput()
+    fun undoLastInput()
     {
         //pops last off of countStack then recalculates allowing operator to fix their mistake
 
     }
 
-    fun CalculateTrueCount()
+    fun calculateTrueCount()
     {
         if (decksRemaining > 0)
         {
@@ -28,17 +33,13 @@ class CountSession(val playerName : String, val tableName : String,
         }
 
     }
-    fun setRunningCount( newRCount : Int)
+    fun updateRunningCount( newRCount : Int)
     {
         runningCount = newRCount
     }
-    fun getRunningCount() : Int
-    {
-        return runningCount;
-    }
     fun getDecksRemaining() : Int
     {
-        return decksRemaining;
+        return decksRemaining
     }
     fun setDecksRemaining(newDecksRemaining : Int)
     {
@@ -48,21 +49,13 @@ class CountSession(val playerName : String, val tableName : String,
     {
         return trueCount
     }
-    fun setWager( newWager : Int)
-    {
-        wager = newWager
-    }
-    fun getWager() : Int
-    {
-        return wager;
-    }
     fun setWagerAdvantage( newAdvantage : Int)
     {
         wagerAdvantage = newAdvantage
     }
     fun getWagerAdvantage() : Int
     {
-        return wagerAdvantage;
+        return wagerAdvantage
     }
     fun setWagerDisadvantage( newDisad : Int)
     {
@@ -70,20 +63,10 @@ class CountSession(val playerName : String, val tableName : String,
     }
     fun getWagerDisadvantage() : Int
     {
-        return wagerDisadvantage;
+        return wagerDisadvantage
     }
-    fun setHand( newHand : Int)
+    fun updateHand()
     {
-        hand = newHand
+        hand++
     }
-    fun getHand() : Int
-    {
-        return hand;
-    }
-
-
-
-
-
-
 }
