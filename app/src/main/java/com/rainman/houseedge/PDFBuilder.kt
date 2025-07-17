@@ -1,11 +1,10 @@
-package com.example.houseedge
+package com.rainman.houseedge
 
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import androidx.core.content.ContextCompat
-import com.example.houseedge.Hand
 import java.io.File
 import java.io.FileOutputStream
 

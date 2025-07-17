@@ -1,4 +1,4 @@
-package com.example.houseedge
+package com.rainman.houseedge
 
 import org.junit.Test
 

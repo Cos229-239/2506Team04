@@ -1,4 +1,4 @@
-package com.example.houseedge
+package com.rainman.houseedge
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

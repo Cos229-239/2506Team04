@@ -1,4 +1,4 @@
-package com.example.houseedge
+package com.rainman.houseedge
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.houseedge.ui.theme.ui.theme
+package com.rainman.houseedge.ui.theme.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

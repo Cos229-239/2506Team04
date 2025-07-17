@@ -1,4 +1,4 @@
-package com.example.houseedge.loginSystem
+package com.rainman.houseedge.loginSystem
 
 
 
@@ -33,7 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.houseedge.DetailActivity
+import com.rainman.houseedge.DetailActivity
 
 
 class LoginActivity : ComponentActivity() {
