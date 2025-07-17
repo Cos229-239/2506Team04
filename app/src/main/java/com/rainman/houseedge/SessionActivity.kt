@@ -1,9 +1,12 @@
 package com.rainman.houseedge
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,6 +22,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
@@ -165,6 +169,24 @@ fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCoun
     val session = remember { CountSession(playerName, tableName, seatNumber, deckCount) }
     var wagerInput by remember { mutableStateOf("") }
     var showBottomSheet by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val handList = mutableListOf<Hand>()
+
+  //  handList.add(Hand(1,2,"Win", 100))
+
+    val pdfLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = { result ->
+            result.data?.data?.let { uri->
+
+                val pdfDataLength = 700
+                val pageHeight = handList.size * pdfDataLength
+                createPDF(context, 816,pageHeight,1,handList,uri )
+
+
+            }
+        }
+    )
 
 
 
@@ -260,9 +282,36 @@ fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCoun
                         CountButtons("+1") { session.updateRunningCount(session.runningCount + 1) }
                         CountButtons("0") { }
                         CountButtons("-1") { session.updateRunningCount(session.runningCount - 1) }
+
+
+                        //Export Button
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White)
+                                .border(3.dp, Color.Black)
+                                .padding(16.dp)
+                                .clickable {
+                                    scope.launch {
+                                        Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                                            type = "application/pdf"
+                                            putExtra(Intent.EXTRA_TITLE, "HouseEdgeData")
+                                            pdfLauncher.launch(this)
+                                        }
+
+
+                                    }
+                                }
+                        ) {
+                            Text(text = "Export", fontSize = 18.sp)
+                        }
                     }
+
                 }
-            }
+
+
+
+                }
+
             // Bottom Sheet for the Wager input menu
             if (showBottomSheet) {
                 ModalBottomSheet(
