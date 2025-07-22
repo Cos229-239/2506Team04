@@ -44,7 +44,7 @@ class SessionActivity : ComponentActivity() {
 }
 
 @Composable
-fun WinLossMenu(onResult: () -> Unit) {
+fun WinLossMenu( session : CountSession ,handList: MutableList<Hand>, onResult: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -56,18 +56,29 @@ fun WinLossMenu(onResult: () -> Unit) {
     ) {
         listOf("Win", "Loss", "Push").forEach { label ->
             OutlinedButton(
-                onClick = onResult,
+                onClick = {
+
+                    session.result = label
+                    handList.add(session.createHand())
+                    session.updateHand()
+                },
+
                 modifier = Modifier
+
                     .fillMaxWidth()
                     .height(225.dp)
                     .padding(8.dp),
+
                 border = BorderStroke(4.dp, Color.White),
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = Color.White,
                     containerColor = Color(0xFF444444)
+
+
                 )
             ) {
                 Text(label, fontSize = 64.sp)
+
             }
         }
     }
@@ -172,7 +183,7 @@ fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCoun
     val context = LocalContext.current
     val handList = mutableListOf<Hand>()
 
-  //  handList.add(Hand(1,2,"Win", 100))
+    //handList.add(Hand(1,2,"Win", 100))
 
     val pdfLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
@@ -193,8 +204,8 @@ fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCoun
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            WinLossMenu {
-                session.updateHand()
+
+            WinLossMenu(session, handList)  {
                 scope.launch { drawerState.close() }
             }
         }
@@ -280,7 +291,7 @@ fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCoun
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         CountButtons("+1") { session.updateRunningCount(session.runningCount + 1) }
-                        CountButtons("0") { }
+                        CountButtons("0") {   }
                         CountButtons("-1") { session.updateRunningCount(session.runningCount - 1) }
 
 
