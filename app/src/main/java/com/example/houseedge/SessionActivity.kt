@@ -2,6 +2,7 @@ package com.example.houseedge
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
@@ -19,11 +20,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.windowsizeclass.*
 import kotlinx.coroutines.launch
 
-
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class SessionActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,9 @@ class SessionActivity : ComponentActivity() {
         val deckCount = intent.getIntExtra("deckCount", 0)
 
         setContent {
-            CountScreen( playerName, tableName, seatNumber, deckCount)
+            val activity = LocalActivity.current!!
+            val windowSizeClass = calculateWindowSizeClass(activity)
+            CountScreen(playerName, tableName, seatNumber, deckCount, windowSizeClass.widthSizeClass)
         }
     }
 }
@@ -71,12 +76,12 @@ fun WinLossMenu(onResult: () -> Unit) {
 
 // Design function for the buttons to update the count
 @Composable
-fun CountButtons(label: String, onClick: () -> Unit) {
+fun CountButtons(label: String, height: Dp, onClick: () -> Unit) {
     OutlinedButton(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .height(240.dp)
+            .height(height)
             .padding(8.dp),
         border = BorderStroke(4.dp, Color.White),
         colors = ButtonDefaults.outlinedButtonColors(
@@ -158,15 +163,19 @@ fun NumberPad(input: String, onInputChanged: (String) -> Unit, onApply: () -> Un
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCount: Int) {
+fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCount: Int, windowSize: WindowWidthSizeClass) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     val session = remember { CountSession(playerName, tableName, seatNumber, deckCount) }
     var wagerInput by remember { mutableStateOf("") }
     var showBottomSheet by remember { mutableStateOf(false) }
-
-
+    val buttonHeight: Dp = when (windowSize) {
+        WindowWidthSizeClass.Compact -> 140.dp
+        WindowWidthSizeClass.Medium -> 200.dp
+        WindowWidthSizeClass.Expanded -> 180.dp
+        else -> 240.dp
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -257,9 +266,9 @@ fun CountScreen(playerName: String, tableName: String, seatNumber: Int, deckCoun
                     // Count Buttons to update the Count within the app screen
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        CountButtons("+1") { session.updateRunningCount(session.runningCount + 1) }
-                        CountButtons("0") { }
-                        CountButtons("-1") { session.updateRunningCount(session.runningCount - 1) }
+                        CountButtons("+1", buttonHeight) { session.updateRunningCount(session.runningCount + 1) }
+                        CountButtons("0", buttonHeight) { }
+                        CountButtons("-1", buttonHeight) { session.updateRunningCount(session.runningCount - 1) }
                     }
                 }
             }
