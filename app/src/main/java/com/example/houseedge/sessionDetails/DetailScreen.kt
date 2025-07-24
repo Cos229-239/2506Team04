@@ -1,4 +1,4 @@
-package com.rainman.houseedge
+package com.example.houseedge.sessionDetails
 
 import android.content.Intent
 import android.os.Bundle
@@ -56,7 +56,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
-
+import com.example.houseedge.SessionActivity
 
 class DetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,9 +70,13 @@ class DetailActivity : ComponentActivity() {
 
 @Composable
 fun DetailScreen() {
+    var player by remember { mutableStateOf("") }
+    var table by remember { mutableStateOf("") }
+    var seat by remember { mutableStateOf("") }
+    var decks by remember { mutableStateOf("") }
 
     Scaffold {
-        innerPadding ->
+            innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -102,18 +106,13 @@ fun DetailScreen() {
                     .padding(horizontal = 30.dp, vertical = 70.dp)
 
             ) {
-                var player by remember { mutableStateOf("") }
-                var table by remember { mutableStateOf("") }
-                var seat by remember { mutableStateOf("") }
-                var decks by remember { mutableStateOf("") }
-
                 val focusManager = LocalFocusManager.current
 
-                TextField(
-                    value = player,
+                DetailTextField(
+                    text = player,
                     onValueChange = { player = it },
                     placeholder = {
-                        Text(text = "Player Name", color = Color.Black)
+                        Text(text = "Player Name")
                     },
                     supportingText = {
                         Text(text = "*required", color = Color.Black)
