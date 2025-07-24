@@ -1,4 +1,4 @@
-package com.example.houseedge.loginSystem
+package com.example.houseedge.registrationSystem
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoginButton(
+fun CreateAccountButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier

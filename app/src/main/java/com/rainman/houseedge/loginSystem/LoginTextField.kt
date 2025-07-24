@@ -1,16 +1,14 @@
-package com.example.houseedge
+package com.rainman.houseedge.loginSystem
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -25,25 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-
-class LoginActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            LoginScreen()
-        }
-    }
-}
-
-@Composable
-fun LoginScreen() {
-
-
-}
 
 @Composable
 fun LoginScreenTextField(
@@ -59,6 +39,7 @@ fun LoginScreenTextField(
     }
     Column(
         modifier = modifier
+
     ) {
         Text(
             text = label,
@@ -68,15 +49,16 @@ fun LoginScreenTextField(
         OutlinedTextField(
             value = text,
             onValueChange = onValueChange,
-            visualTransformation = if(isInputSecret){
+            modifier = Modifier.fillMaxWidth(),
+            visualTransformation = if (isPasswordVisible) {
                 PasswordVisualTransformation(mask = '*')
             } else VisualTransformation.None,
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.Transparent,
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
                 unfocusedContainerColor = MaterialTheme.colorScheme.surface,
                 cursorColor = MaterialTheme.colorScheme.primary,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor =  Color.Transparent
+                unfocusedBorderColor = Color.Transparent
             ),
             placeholder = {
                 Text(
@@ -87,51 +69,29 @@ fun LoginScreenTextField(
             textStyle = MaterialTheme.typography.bodyLarge,
             shape = RoundedCornerShape(10.dp),
             trailingIcon = {
-                if (isInputSecret)
-                IconButton(
-                    onClick = {
-                        isPasswordVisible = !isPasswordVisible
-                    }
-                ) {
-                    when{
-                        isInputSecret && isPasswordVisible -> {
-
+                if (isInputSecret) {
+                    IconButton(
+                        onClick = {
+                            isPasswordVisible = !isPasswordVisible
                         }
-                        isInputSecret && !isPasswordVisible -> {
-
+                    ) {
+                        when {
+                            isPasswordVisible -> {
+                                Icon(
+                                    imageVector = Icons.Default.VisibilityOff,
+                                    contentDescription = "Hide password"
+                                )
+                            }
+                            !isPasswordVisible -> {
+                                Icon(
+                                    imageVector = Icons.Default.Visibility,
+                                    contentDescription = "Show password"
+                                )
+                            }
                         }
                     }
                 }
             }
         )
     }
-}
-
-
-@Composable
-fun LoginButton(
-    text: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier,
-        shape = RoundedCornerShape(10.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary
-        ),
-        contentPadding = PaddingValues(12.dp)
-    ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleSmall
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen()
 }

@@ -1,4 +1,4 @@
-package com.example.houseedge
+package com.example.houseedge.sessionDetails
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -38,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
@@ -54,7 +56,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
-
+import com.example.houseedge.SessionActivity
 
 class DetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,12 +70,23 @@ class DetailActivity : ComponentActivity() {
 
 @Composable
 fun DetailScreen() {
+    var player by remember { mutableStateOf("") }
+    var table by remember { mutableStateOf("") }
+    var seat by remember { mutableStateOf("") }
+    var decks by remember { mutableStateOf("") }
 
-    Scaffold { innerPadding ->
+    Scaffold {
+            innerPadding ->
         Box(
             modifier = Modifier
-                .padding(innerPadding)
                 .fillMaxSize()
+                .padding(innerPadding)
+                .clip(
+                    RoundedCornerShape(
+                        topStart = 25.dp,
+                        topEnd = 25.dp
+                    )
+                )
                 .background(
                     Brush.linearGradient(
                         listOf(
@@ -93,18 +106,13 @@ fun DetailScreen() {
                     .padding(horizontal = 30.dp, vertical = 70.dp)
 
             ) {
-                var player by remember { mutableStateOf("") }
-                var table by remember { mutableStateOf("") }
-                var seat by remember { mutableStateOf("") }
-                var decks by remember { mutableStateOf("") }
-
                 val focusManager = LocalFocusManager.current
 
-                TextField(
-                    value = player,
+                DetailTextField(
+                    text = player,
                     onValueChange = { player = it },
                     placeholder = {
-                        Text(text = "Player Name", color = Color.Black)
+                        Text(text = "Player Name")
                     },
                     supportingText = {
                         Text(text = "*required", color = Color.Black)
