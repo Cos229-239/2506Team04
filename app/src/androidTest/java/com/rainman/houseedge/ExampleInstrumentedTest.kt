@@ -1,4 +1,4 @@
-package com.example.houseedge
+package com.rainman.houseedge
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

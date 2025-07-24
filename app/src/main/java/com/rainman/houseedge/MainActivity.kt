@@ -1,4 +1,4 @@
-package com.example.houseedge
+package com.rainman.houseedge
 
 import android.content.Intent
 import android.os.Bundle
@@ -28,8 +28,8 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.houseedge.ui.theme.HouseEdgeTheme
-import com.example.houseedge.loginSystem.LoginActivity
+import com.rainman.houseedge.ui.theme.HouseEdgeTheme
+import com.rainman.houseedge.loginSystem.LoginActivity
 
 
 class MainActivity : ComponentActivity() {

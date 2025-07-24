@@ -4,7 +4,6 @@ package com.example.houseedge.loginSystem
 
 
 
-import HouseEdgeLink
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,7 +26,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -36,7 +34,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.houseedge.DetailActivity
-import com.example.houseedge.registrationSystem.RegistrationActivity
 
 
 class LoginActivity : ComponentActivity() {
@@ -167,16 +164,6 @@ fun LoginFormSection(
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(28.dp))
-
-            HouseEdgeLink(
-                text = "Don't have an Account?" ,
-                onClick = {
-                    val intent = Intent(context, RegistrationActivity::class.java)
-                    context.startActivity(intent)
-                          },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-            )
         }
     }
 }
