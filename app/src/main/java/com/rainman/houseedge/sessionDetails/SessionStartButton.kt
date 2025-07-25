@@ -1,4 +1,4 @@
-package com.example.houseedge.sessionDetails
+package com.rainman.houseedge.sessionDetails
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues

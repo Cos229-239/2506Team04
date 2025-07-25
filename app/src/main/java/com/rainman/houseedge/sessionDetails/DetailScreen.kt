@@ -1,4 +1,4 @@
-package com.example.houseedge.sessionDetails
+package com.rainman.houseedge.sessionDetails
 
 import android.content.Intent
 import android.os.Bundle
@@ -57,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import com.example.houseedge.SessionActivity
+
 
 class DetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

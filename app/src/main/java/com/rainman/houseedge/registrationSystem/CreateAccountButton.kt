@@ -1,4 +1,4 @@
-package com.example.houseedge.registrationSystem
+package com.rainman.houseedge.registrationSystem
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues

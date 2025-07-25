@@ -1,4 +1,4 @@
-package com.example.houseedge.sessionDetails
+package com.rainman.houseedge.sessionDetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

@@ -1,4 +1,4 @@
-package com.example.houseedge.registrationSystem
+package com.rainman.houseedge.registrationSystem
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
