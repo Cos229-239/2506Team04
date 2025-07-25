@@ -29,7 +29,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.houseedge.DetailActivity
+import com.example.houseedge.sessionDetails.DetailActivity
+
 
 class RegistrationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,7 +110,7 @@ fun LoginHeaderSection(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Create Account",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.displaySmall
         )
         Text(
             text = "Catch Those Card Counters!",

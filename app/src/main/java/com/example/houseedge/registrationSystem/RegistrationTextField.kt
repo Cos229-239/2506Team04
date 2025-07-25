@@ -66,7 +66,7 @@ fun RegistrationTextField(
                     style = MaterialTheme.typography.bodyLarge
                 )
             },
-            textStyle = MaterialTheme.typography.bodyLarge,
+
             shape = RoundedCornerShape(10.dp),
             trailingIcon = {
                 if (isInputSecret) {

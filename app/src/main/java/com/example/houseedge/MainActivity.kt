@@ -114,8 +114,6 @@ fun StartButton() {
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic
                 )
-
-
             }
         }
     }

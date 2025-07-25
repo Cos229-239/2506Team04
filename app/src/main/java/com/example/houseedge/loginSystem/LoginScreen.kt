@@ -14,10 +14,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -35,8 +39,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.houseedge.DetailActivity
 import com.example.houseedge.registrationSystem.RegistrationActivity
+import com.example.houseedge.sessionDetails.DetailActivity
 
 
 class LoginActivity : ComponentActivity() {
@@ -57,7 +61,7 @@ fun LoginScreen() {
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
-
+        contentWindowInsets = WindowInsets.statusBars
         ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -82,8 +86,9 @@ fun LoginScreen() {
                 )
                 .padding(
                     horizontal = 16.dp,
-                    vertical = 8.dp
+                    vertical = 24.dp
                 )
+                .consumeWindowInsets(WindowInsets.navigationBars)
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -111,7 +116,7 @@ fun LoginHeaderSection(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Log In",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.displaySmall
         )
         Text(
             text = "Catch Those Card Counters!",
@@ -166,7 +171,7 @@ fun LoginFormSection(
                 },
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(14.dp))
 
             HouseEdgeLink(
                 text = "Don't have an Account?" ,

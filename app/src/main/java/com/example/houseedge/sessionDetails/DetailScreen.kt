@@ -5,10 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -24,11 +21,10 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -37,7 +33,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
@@ -48,15 +43,11 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
-import com.example.houseedge.SessionActivity
 
 class DetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,9 +65,9 @@ fun DetailScreen() {
     var table by remember { mutableStateOf("") }
     var seat by remember { mutableStateOf("") }
     var decks by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
-    Scaffold {
-            innerPadding ->
+    Scaffold { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -103,20 +94,15 @@ fun DetailScreen() {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 30.dp, vertical = 70.dp)
-
+                    .padding(horizontal = 16.dp, vertical = 48.dp)
             ) {
                 val focusManager = LocalFocusManager.current
 
                 DetailTextField(
                     text = player,
                     onValueChange = { player = it },
-                    placeholder = {
-                        Text(text = "Player Name")
-                    },
-                    supportingText = {
-                        Text(text = "*required", color = Color.Black)
-                    },
+                    placeholder = "Player Name",
+                    supportingText = "*required",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Next
@@ -127,21 +113,15 @@ fun DetailScreen() {
                         },
                     ),
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth(1f)
+                    modifier = Modifier.fillMaxWidth()
+
 
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-
-
-                TextField(
-                    value = table,
+                DetailTextField(
+                    text = table,
                     onValueChange = { table = it },
-                    placeholder = {
-                        Text(text = "Table Number", color = Color.Black)
-                    },
-                    supportingText = {
-                        Text(text = "*required", color = Color.Black)
-                    },
+                    placeholder = "Table Number",
+                    supportingText = "*required",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Next
@@ -152,19 +132,13 @@ fun DetailScreen() {
                         },
                     ),
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth(1f)
+                    modifier = Modifier.fillMaxWidth()
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-
-                TextField(
-                    value = seat,
+                DetailTextField(
+                    text = seat,
                     onValueChange = { seat = it },
-                    placeholder = {
-                        Text(text = "Seat Number", color = Color.Black)
-                    },
-                    supportingText = {
-                        Text(text = "*required", color = Color.Black)
-                    },
+                    placeholder = "Seat Number",
+                    supportingText = "*required",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Next
@@ -177,18 +151,11 @@ fun DetailScreen() {
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(1f)
                 )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                TextField(
-                    value = decks,
+                DetailTextField(
+                    text = decks,
                     onValueChange = { decks = it },
-                    placeholder = {
-                        Text(text = "Number of Decks", color = Color.Black)
-                    },
-                    supportingText = {
-                        Text(text = "*required", color = Color.Black)
-                    },
+                    placeholder = "Number of Decks",
+                    supportingText = "*required",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
                         imeAction = ImeAction.Next
@@ -199,7 +166,7 @@ fun DetailScreen() {
                         },
                     ),
                     singleLine = true,
-                    modifier = Modifier.fillMaxWidth(1f)
+                    modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -225,16 +192,24 @@ fun DetailScreen() {
                                 textFieldSize = layoutCoordinates.size.toSize()
                             },
                         placeholder = {
-                            Text(text = "Count Method", color = Color.Black)
+                            Text(
+                                text = "Count Method"
+                            )
                         },
                         trailingIcon = {
                             Icon(
                                 icon, "Count Methods",
-                                Modifier.clickable { mExpanded = !mExpanded })
+                                Modifier.clickable { mExpanded = !mExpanded }
+                            )
                         },
                         supportingText = {
-                            Text(text = "*required", color = Color.Black)
-                        }
+                            Text(
+                                text = "*required",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = Color.Black
+                            )
+                        },
+                        shape = RoundedCornerShape(10.dp),
                     )
                     DropdownMenu(
                         expanded = mExpanded,
@@ -254,59 +229,65 @@ fun DetailScreen() {
                     }
                 }
             }
-            StartCountButton()
-        }
-    }
-}
-
-
-@Composable
-fun StartCountButton() {
-
-    val context = LocalContext.current
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 120.dp),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        Button(
-            onClick = {
-                val intent = Intent(context, SessionActivity::class.java)
-                context.startActivity(intent)
-            },
-            enabled = true,
-            shape = ButtonDefaults.shape,
-            border = BorderStroke(2.dp, color = Color.White),
-            modifier = Modifier
-                .size(400.dp, 150.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF6C6060),
-                contentColor = Color.Black,
+            SessionStartButton(
+                onClick = {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    context.startActivity(intent)
+                },
+                modifier = Modifier.fillMaxWidth()
             )
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Bottom,
-                modifier = Modifier
-            ) {
-                Text(
-                    text = "START ",
-                    fontSize = 50.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontStyle = FontStyle.Italic
-                )
-                Text(
-                    text = "COUNT",
-                    fontSize = 50.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontStyle = FontStyle.Italic
-                )
-            }
         }
     }
 }
+
+
+//@Composable
+//fun StartCountButton() {
+//
+//    val context = LocalContext.current
+//
+//    Box(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(horizontal = 16.dp, vertical = 120.dp),
+//        contentAlignment = Alignment.BottomCenter
+//    ) {
+//        Button(
+//            onClick = {
+//                val intent = Intent(context, SessionActivity::class.java)
+//                context.startActivity(intent)
+//            },
+//            enabled = true,
+//            shape = ButtonDefaults.shape,
+//            border = BorderStroke(2.dp, color = Color.White),
+//            modifier = Modifier
+//                .size(400.dp, 150.dp),
+//            colors = ButtonDefaults.buttonColors(
+//                containerColor = Color(0xFF6C6060),
+//                contentColor = Color.Black,
+//            )
+//        ) {
+//            Column(
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                verticalArrangement = Arrangement.Bottom,
+//                modifier = Modifier
+//            ) {
+//                Text(
+//                    text = "START ",
+//                    fontSize = 50.sp,
+//                    fontWeight = FontWeight.Bold,
+//                    fontStyle = FontStyle.Italic
+//                )
+//                Text(
+//                    text = "COUNT",
+//                    fontSize = 50.sp,
+//                    fontWeight = FontWeight.Bold,
+//                    fontStyle = FontStyle.Italic
+//                )
+//            }
+//        }
+//    }
+//}
 
 @Preview(showBackground = true)
 @Composable

@@ -20,5 +20,4 @@ fun HouseEdgeLink(
         color =  Color(0xFFEFB8C8),
         textAlign = TextAlign.Center
     )
-
 }
