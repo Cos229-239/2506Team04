@@ -1,4 +1,4 @@
-package com.rainman.houseedge
+package com.example.houseedge
 
 import android.content.Context
 import android.graphics.Paint
