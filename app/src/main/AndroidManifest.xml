@@ -13,7 +13,7 @@
         android:theme="@style/Theme.HouseEdge"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.houseedge.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.HouseEdge">
@@ -24,25 +24,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SessionActivity"
+            android:name="com.example.houseedge.SessionActivity"
             android:exported="false"
             android:label="Session Activity"
             android:theme="@style/Theme.HouseEdge">
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name="com.example.houseedge.DetailActivity"
             android:exported="false"
             android:label="Detail Activity"
             android:theme="@style/Theme.HouseEdge">
         </activity>
         <activity
-            android:name=".loginSystem.LoginActivity"
+            android:name="com.example.houseedge.loginSystem.LoginActivity"
             android:exported="false"
             android:label="Detail Activity"
             android:theme="@style/Theme.HouseEdge">
         </activity>
         <activity
-            android:name=".registrationSystem.RegistrationActivity"
+            android:name="com.example.houseedge.registrationSystem.RegistrationActivity"
             android:exported="false"
             android:label="Registration Activity"
             android:theme="@style/Theme.HouseEdge">

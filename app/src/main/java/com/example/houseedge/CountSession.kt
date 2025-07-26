@@ -1,4 +1,4 @@
-package com.rainman.houseedge
+package com.example.houseedge
 
 import androidx.compose.runtime.*
 

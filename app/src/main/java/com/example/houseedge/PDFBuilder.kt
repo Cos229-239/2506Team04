@@ -1,4 +1,4 @@
-package com.rainman.houseedge
+package com.example.houseedge
 
 import android.content.Context
 import android.graphics.Paint
@@ -6,10 +6,11 @@ import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import androidx.core.content.ContextCompat
+import com.rainman.houseedge.R
 
 
 //LATER Create Hand class and change String to Hand
-fun createPDF( context: Context,pageWidth: Int, pageHeight: Int, pageNumber :Int, handData:MutableList<Hand>, uri : Uri)
+fun createPDF(context: Context, pageWidth: Int, pageHeight: Int, pageNumber :Int, handData:MutableList<Hand>, uri : Uri)
 {
     val pdfCreator = PdfDocument()
 
@@ -20,7 +21,7 @@ fun createPDF( context: Context,pageWidth: Int, pageHeight: Int, pageNumber :Int
     val canvas = page.canvas
     val text = Paint()
     text.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD))
-    text.setColor(ContextCompat.getColor(context,R.color.black))
+    text.setColor(ContextCompat.getColor(context, R.color.black))
     text.textSize = 30F
     text.textAlign = Paint.Align.CENTER
 
