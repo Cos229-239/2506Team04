@@ -1,8 +1,4 @@
-package com.rainman.houseedge.loginSystem
-
-
-
-
+package com.example.houseedge.registrationSystem
 
 import android.content.Intent
 import android.os.Bundle
@@ -33,23 +29,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.rainman.houseedge.DetailActivity
+import com.example.houseedge.DetailActivity
 
-
-class LoginActivity : ComponentActivity() {
+class RegistrationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LoginScreen()
+            RegistrationScreen()
         }
     }
 }
 
 @Composable
-fun LoginScreen() {
+fun RegistrationScreen() {
     var usernameText by remember { mutableStateOf("") }
+    var emailText by remember { mutableStateOf("") }
     var passwordText by remember { mutableStateOf("") }
+    var confirmPasswordText by remember { mutableStateOf("") }
 
     Scaffold(
         modifier = Modifier
@@ -92,8 +89,12 @@ fun LoginScreen() {
             LoginFormSection(
                 usernameText = usernameText,
                 onUsernameTextChange = { usernameText = it },
+                emailText = emailText ,
+                onEmailText = { emailText = it},
                 passwordText = passwordText,
                 onPasswordTextChange = { passwordText = it },
+                confirmPasswordText = confirmPasswordText,
+                onConfirmPasswordText = {confirmPasswordText = it},
                 modifier = Modifier
                     .fillMaxSize()
             )
@@ -107,8 +108,8 @@ fun LoginHeaderSection(modifier: Modifier = Modifier) {
         modifier = modifier
     ) {
         Text(
-            text = "Log In",
-            style = MaterialTheme.typography.titleLarge
+            text = "Create Account",
+            style = MaterialTheme.typography.displaySmall
         )
         Text(
             text = "Catch Those Card Counters!",
@@ -121,8 +122,12 @@ fun LoginHeaderSection(modifier: Modifier = Modifier) {
 fun LoginFormSection(
     usernameText: String,
     onUsernameTextChange: (String) -> Unit,
+    emailText: String,
+    onEmailText: (String) -> Unit,
     passwordText: String,
     onPasswordTextChange: (String) -> Unit,
+    confirmPasswordText: String,
+    onConfirmPasswordText: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -133,7 +138,7 @@ fun LoginFormSection(
         Column(
             modifier = modifier
         ) {
-            LoginScreenTextField(
+            RegistrationTextField(
                 text = usernameText,
                 onValueChange = onUsernameTextChange,
                 label = "UserName",
@@ -144,7 +149,19 @@ fun LoginFormSection(
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            LoginScreenTextField(
+            RegistrationTextField(
+                text = emailText,
+                onValueChange = onEmailText,
+                label = "email",
+                hint = "john.doe@example.com",
+                isInputSecret = false,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            RegistrationTextField(
                 text = passwordText,
                 onValueChange = onPasswordTextChange,
                 label = "Password",
@@ -155,8 +172,20 @@ fun LoginFormSection(
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            LoginButton(
-                text = "Log In",
+            RegistrationTextField(
+                text = confirmPasswordText,
+                onValueChange = onConfirmPasswordText,
+                label = "Password",
+                hint = "Password",
+                isInputSecret = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+            CreateAccountButton(
+                text = "Create Account",
                 onClick = {
                     val intent = Intent(context, DetailActivity::class.java)
                     context.startActivity(intent)
@@ -170,6 +199,6 @@ fun LoginFormSection(
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
-    LoginScreen()
+fun RegistrationScreenPreview() {
+    RegistrationScreen()
 }

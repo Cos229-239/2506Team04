@@ -1,4 +1,4 @@
-package com.rainman.houseedge.loginSystem
+package com.example.houseedge.registrationSystem
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,7 +26,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoginScreenTextField(
+fun RegistrationTextField(
     text: String,
     onValueChange: (String) -> Unit,
     label: String,
@@ -66,7 +66,7 @@ fun LoginScreenTextField(
                     style = MaterialTheme.typography.bodyLarge
                 )
             },
-            textStyle = MaterialTheme.typography.bodyLarge,
+
             shape = RoundedCornerShape(10.dp),
             trailingIcon = {
                 if (isInputSecret) {

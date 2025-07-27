@@ -1,6 +1,8 @@
-package com.rainman.houseedge
+package com.example.houseedge
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
 
 
 class CountSession(val playerName : String, val tableName : String,
@@ -10,6 +12,7 @@ class CountSession(val playerName : String, val tableName : String,
         private set
     private var decksRemaining = deckCount
 
+    var result = ""
     //Operator input is pushed onto the countStack
     private val countStack :MutableList<String> = mutableListOf()
     private var trueCount = 0       // trueCount = runningCount/decksRemaining
@@ -18,6 +21,12 @@ class CountSession(val playerName : String, val tableName : String,
     var wager by mutableIntStateOf(0)
     private var wagerAdvantage = 0
     private var wagerDisadvantage = 0
+
+
+    fun createHand() : Hand
+    {
+        return Hand(this.hand, this.runningCount, this.result, this.wager)
+    }
 
     fun undoLastInput()
     {

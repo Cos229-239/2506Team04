@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rainman.houseedge"
+    namespace = "com.example.houseedge"
     compileSdk = 35
 
     defaultConfig {

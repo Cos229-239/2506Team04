@@ -1,4 +1,4 @@
-package com.rainman.houseedge.ui.theme
+package com.example.houseedge.ui.theme.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
