@@ -48,6 +48,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import com.example.houseedge.SessionActivity
 
 class DetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -231,7 +232,7 @@ fun DetailScreen() {
             }
             SessionStartButton(
                 onClick = {
-                    val intent = Intent(context, DetailActivity::class.java)
+                    val intent = Intent(context, SessionActivity::class.java)
                     context.startActivity(intent)
                 },
                 modifier = Modifier.fillMaxWidth()
